@@ -55,9 +55,66 @@
   class Product{
     constructor(id, data){
       const thisProduct = this;
+
       thisProduct.id = id;
       thisProduct.data = data;
+
+      thisProduct.renderInMenu();
+
+      thisProduct.initAccordion();
+
       console.log('new Product: ', thisProduct);
+    }
+
+    renderInMenu(){
+      const thisProduct = this;
+
+      //generate HTML based on template
+      const generateHTML = templates.menuProduct(thisProduct.data);
+      //console.log(generateHTML);
+
+      //create DOM element using utils.createElementFromHTML
+      thisProduct.element = utils.createDOMFromHTML(generateHTML);
+
+      //find menu container
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+      //add element DOM to menu
+      menuContainer.appendChild(thisProduct.element);
+    }
+
+    initAccordion(){
+      const thisProduct = this;
+
+      /* find the clickable trigger (the element that should react to clicking) */
+      const productButton = thisProduct.element.querySelector(select.menuProduct.clickable);
+
+      /* START: click event listener to trigger */
+      productButton.addEventListener('click', function(event){
+        console.log('klikniety');
+
+        /* prevent default action for event */
+        event.preventDefault();
+
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle('active');
+
+        /* find all active products */
+        const activeProducts = document.querySelectorAll('active');
+
+        /* START LOOP: for each active product */
+        for(activeProduct of activeProducts){
+
+          /* START: if the active product isn't the element of thisProduct */
+          if(!activeProduct == thisProduct){
+            /* remove class active for the active product */
+            thisProduct.classList.remove('active');
+          /* END: if the active product isn't the element of thisProduct */
+          }
+          /* END LOOP: for each active product */
+        }
+        /* END: click event listener to trigger */
+      });
     }
   }
 
