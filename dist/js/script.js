@@ -100,13 +100,13 @@
         thisProduct.element.classList.toggle('active');
 
         /* find all active products */
-        const activeProducts = document.querySelectorAll('.active');
+        const activeProducts = document.querySelectorAll('.product.active');
 
         /* START LOOP: for each active product */
-        for(activeProduct of activeProducts){
+        for(let activeProduct of activeProducts){
 
           /* START: if the active product isn't the element of thisProduct */
-          if(!activeProduct == thisProduct){
+          if(activeProduct != thisProduct.element){
             /* remove class active for the active product */
             activeProduct.classList.remove('active');
           /* END: if the active product isn't the element of thisProduct */
