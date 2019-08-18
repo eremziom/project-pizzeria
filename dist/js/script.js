@@ -180,19 +180,28 @@
           // If option is selected AND option is not default
           if(formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1 && !option.default){
             console.log('Dodano opcję niestandardową ', optionId);
-            //add price of option to variable price
-            const optionPrice = option.price;
-            console.log('cena dodatku to: ', optionPrice);
-            price = price + optionPrice;
-            console.log('cena produktu z dodatkiem to: ', price);
 
+            //add price of option to variable price
+            const optionPriceAdd = option.price;
+            console.log('cena dodatku to: ', optionPriceAdd);
+            price = price + optionPriceAdd;
+            console.log('cena produktu z dodatkiem to: ', price);
           }
+
           // If option is not selected AND option is default
+          if(!(formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1) && option.default){
+            console.log('Odjęto opcję standardową ', optionId);
+
             //deduct price of option from variable price
+            const optionPriceDeduct = option.price;
+            price = price - optionPriceDeduct;
+            console.log('cena produktu bez dodatku standardowego to: ', price);
+          }
         }
       }
 
       // Set the content of thisProduct.priceElem to be the value of variable price
+      thisProduct.priceElem.innerHTML = price;
     }
   }
 
