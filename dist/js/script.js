@@ -67,6 +67,8 @@
 
       thisProduct.initOrderForm();
 
+      thisProduct.initAmountWidget();
+
       thisProduct.processOrder();
 
       console.log('new Product: ', thisProduct);
@@ -95,10 +97,10 @@
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      console.log('SSSSSSS', thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
 
     initAccordion(){
@@ -137,7 +139,7 @@
 
     initOrderForm(){
       const thisProduct = this;
-      console.log('initOrderForm');
+      //console.log('initOrderForm');
 
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -159,50 +161,50 @@
 
     processOrder(){
       const thisProduct = this;
-      console.log('processOrder');
+      //console.log('processOrder');
 
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
-      console.log('PPP', thisProduct.params);
+      //console.log('formData', formData);
+      //console.log('PPP', thisProduct.params);
 
       let price = thisProduct.data.price;
-      console.log('cena to: ', price);
+      //console.log('cena to: ', price);
 
       for(let paramId in thisProduct.data.params){
-        console.log('paramId = ', paramId);
+        //console.log('paramId = ', paramId);
         const param = thisProduct.data.params[paramId];
-        console.log('param = ', param);
+        //console.log('param = ', param);
 
         for(let optionId in param.options){
-          console.log('optionId to: ', optionId);
+          //console.log('optionId to: ', optionId);
           const option = param.options[optionId];
-          console.log('opcja: ', option);
+          //console.log('opcja: ', option);
 
           // If option is selected AND option is not default
           if(formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1 && !option.default){
-            console.log('Dodano opcję niestandardową ', optionId);
+            //console.log('Dodano opcję niestandardową ', optionId);
 
             //add price of option to variable price
             const optionPriceAdd = option.price;
-            console.log('cena dodatku to: ', optionPriceAdd);
+            //console.log('cena dodatku to: ', optionPriceAdd);
             price = price + optionPriceAdd;
-            console.log('cena produktu z dodatkiem to: ', price);
+            //console.log('cena produktu z dodatkiem to: ', price);
           }
 
           // If option is not selected AND option is default
           if(!(formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1) && option.default){
-            console.log('Odjęto opcję standardową ', optionId);
+            //console.log('Odjęto opcję standardową ', optionId);
 
             //deduct price of option from variable price
             const optionPriceDeduct = option.price;
             price = price - optionPriceDeduct;
-            console.log('cena produktu bez dodatku standardowego to: ', price);
+            //console.log('cena produktu bez dodatku standardowego to: ', price);
           }
 
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
 
           if(optionSelected) {
-            console.log('zaznaczona: ');
+            //console.log('zaznaczona: ');
             let imageId = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
             for(let img of imageId) {
@@ -210,7 +212,7 @@
             }
 
           } else {
-            console.log('NIE zaznaczona: ');
+            //console.log('NIE zaznaczona: ');
             let imageId = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
             for(let img of imageId) {
@@ -222,6 +224,63 @@
 
       // Set the content of thisProduct.priceElem to be the value of variable price
       thisProduct.priceElem.innerHTML = price;
+    }
+
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+  }
+
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+
+      thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions();
+
+      console.log('AmountWidget: ', thisWidget);
+      console.log('constructor arguments: ', element);
+    }
+
+    getElements(element){
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      //Add validation
+
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+    }
+
+    initActions(){
+      const thisWidget = this;
+
+      thisWidget.input.addEventListener('change', function(){
+          thisWidget.setValue(thisWidget.input.value);
+        });
+
+      thisWidget.linkDecrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+
+      thisWidget.linkIncrease.addEventListener('click', function(){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
     }
   }
 
