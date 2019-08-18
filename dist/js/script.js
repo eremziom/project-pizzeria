@@ -98,6 +98,7 @@
       console.log('SSSSSSS', thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -196,6 +197,25 @@
             const optionPriceDeduct = option.price;
             price = price - optionPriceDeduct;
             console.log('cena produktu bez dodatku standardowego to: ', price);
+          }
+
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+
+          if(optionSelected) {
+            console.log('zaznaczona: ');
+            let imageId = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+
+            for(let img of imageId) {
+              img.classList.add(classNames.menuProduct.imageVisible);
+            }
+
+          } else {
+            console.log('NIE zaznaczona: ');
+            let imageId = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+
+            for(let img of imageId) {
+              img.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
         }
       }
