@@ -61,7 +61,13 @@
 
       thisProduct.renderInMenu();
 
+      thisProduct.getElements();
+
       thisProduct.initAccordion();
+
+      thisProduct.initOrderForm();
+
+      thisProduct.processOrder();
 
       console.log('new Product: ', thisProduct);
     }
@@ -83,11 +89,22 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
+    getElements(){
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      console.log('SSSSSSS', thisProduct.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
     initAccordion(){
       const thisProduct = this;
 
       /* find the clickable trigger (the element that should react to clicking) */
-      const productButton = thisProduct.element.querySelector(select.menuProduct.clickable);
+      const productButton = thisProduct.accordionTrigger;
 
       /* START: click event listener to trigger */
       productButton.addEventListener('click', function(event){
@@ -115,6 +132,67 @@
         }
         /* END: click event listener to trigger */
       });
+    }
+
+    initOrderForm(){
+      const thisProduct = this;
+      console.log('initOrderForm');
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+    }
+
+    processOrder(){
+      const thisProduct = this;
+      console.log('processOrder');
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData', formData);
+      console.log('PPP', thisProduct.params);
+
+      let price = thisProduct.data.price;
+      console.log('cena to: ', price);
+
+      for(let paramId in thisProduct.data.params){
+        console.log('paramId = ', paramId);
+        const param = thisProduct.data.params[paramId];
+        console.log('param = ', param);
+
+        for(let optionId in param.options){
+          console.log('optionId to: ', optionId);
+          const option = param.options[optionId];
+          console.log('opcja: ', option);
+
+          // If option is selected AND option is not default
+          if(formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1 && !option.default){
+            console.log('Dodano opcję niestandardową ', optionId);
+            //add price of option to variable price
+            const optionPrice = option.price;
+            console.log('cena dodatku to: ', optionPrice);
+            price = price + optionPrice;
+            console.log('cena produktu z dodatkiem to: ', price);
+
+          }
+          // If option is not selected AND option is default
+            //deduct price of option from variable price
+        }
+      }
+
+      // Set the content of thisProduct.priceElem to be the value of variable price
     }
   }
 
