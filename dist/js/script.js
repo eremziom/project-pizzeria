@@ -109,6 +109,7 @@
 
       //create DOM element using utils.createElementFromHTML
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
+      //console.log('AAAA', thisProduct.element);
 
       //find menu container
       const menuContainer = document.querySelector(select.containerOf.menu);
@@ -181,6 +182,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
 
     }
@@ -192,6 +194,9 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       //console.log('formData', formData);
       //console.log('PPP', thisProduct.params);
+
+      thisProduct.params = {};
+      console.log(thisProduct.params);
 
       let price = thisProduct.data.price;
       //console.log('cena to: ', price);
@@ -230,6 +235,15 @@
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
 
           if(optionSelected) {
+
+            if(!thisProduct.params[paramId]){
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
+
             //console.log('zaznaczona: ');
             let imageId = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
@@ -249,10 +263,13 @@
       }
 
       // Multiply price by amount
-      price *= thisProduct.amountWidget.value;
+      //price *= thisProduct.amountWidget.value;
+      thisProduct.priceSingle = price;
+      thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
 
       // Set the content of thisProduct.priceElem to be the value of variable price
-      thisProduct.priceElem.innerHTML = price;
+      //thisProduct.priceElem.innerHTML = price;
+      thisProduct.priceElem.innerHTML = thisProduct.price;
     }
 
     initAmountWidget(){
@@ -263,6 +280,16 @@
       thisProduct.amountWidgetElem.addEventListener('kliker', function(){
         thisProduct.processOrder();
       });
+    }
+
+    addToCart(){
+      const thisProduct = this;
+
+      thisProduct.name = thisProduct.data.name;
+      thisProduct.amount = thisProduct.amountWidget.value;
+
+      app.cart.add(thisProduct);
+
     }
   }
 
@@ -363,10 +390,27 @@
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
 
         console.log('koszyk kliknięty');
-
       });
+    }
 
+    add(menuProduct){
+      const thisCart = this;
 
+      console.log('dodawanie produktu', menuProduct);
+
+      //generate HTML based on template
+      const generateHTML = templates.cartProduct(menuProduct);
+      console.log(generateHTML);
+
+      //create DOM element using utils.createElementFromHTML
+      menuProduct = utils.createDOMFromHTML(generateHTML);
+      console.log(menuProduct);
+
+      //find menu container
+      const cartContainer = document.querySelector(select.containerOf.cart);
+
+      //add element DOM to menu
+      cartContainer.appendChild(menuProduct);
     }
   }
 
