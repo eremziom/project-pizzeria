@@ -105,7 +105,7 @@
 
       //generate HTML based on template
       const generateHTML = templates.menuProduct(thisProduct.data);
-      //console.log(generateHTML);
+      //console.log(thisProduct.data);
 
       //create DOM element using utils.createElementFromHTML
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
@@ -376,6 +376,7 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = element.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -397,20 +398,27 @@
       const thisCart = this;
 
       console.log('dodawanie produktu', menuProduct);
+      console.log('element to: ', menuProduct.element);
 
       //generate HTML based on template
       const generateHTML = templates.cartProduct(menuProduct);
-      console.log(generateHTML);
+      //console.log(generateHTML);
 
       //create DOM element using utils.createElementFromHTML
-      menuProduct = utils.createDOMFromHTML(generateHTML);
-      console.log(menuProduct);
+      menuProduct.element = utils.createDOMFromHTML(generateHTML);
+      console.log('aaa', menuProduct.element);
 
-      //find menu container
-      const cartContainer = document.querySelector(select.containerOf.cart);
+      const generatedDOM = menuProduct.element;
+      console.log('aaa', generatedDOM);
 
-      //add element DOM to menu
-      cartContainer.appendChild(menuProduct);
+      //find cart container
+      const cartContainer = thisCart.dom.productList;
+
+      //add element DOM to cart
+      cartContainer.appendChild(generatedDOM);
+
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.Products ', thisCart.products);
     }
   }
 
