@@ -202,5 +202,15 @@
       }
     }
   ],
-  "order": []
+  "order": [
+    {
+      "addres": "test",
+      "id": 1
+    },
+    {
+      "addres": "test",
+      "totalPrice": 29,
+      "id": 2
+    }
+  ]
 }
