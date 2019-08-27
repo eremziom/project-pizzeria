@@ -204,19 +204,42 @@
   ],
   "order": [
     {
-      "totalPrice": 29,
-      "subtotalPrice": 9,
+      "totalPrice": 40,
+      "subtotalPrice": 20,
       "totalNumber": 1,
       "deliveryFee": 20,
-      "phone": "5555555",
-      "address": "dfyfd",
+      "phone": "",
+      "address": "",
       "products": [
         {
-          "id": "cake",
+          "id": "pizza",
           "amount": 1,
-          "price": 9,
-          "priceSingle": 9,
-          "params": {}
+          "price": 20,
+          "priceSingle": 20,
+          "params": {
+            "sauce": {
+              "label": "Sauce",
+              "options": {
+                "tomato": "Tomato"
+              }
+            },
+            "toppings": {
+              "label": "Toppings",
+              "options": {
+                "olives": "Olives",
+                "redPeppers": "Red peppers",
+                "greenPeppers": "Green peppers",
+                "mushrooms": "Mushrooms",
+                "basil": "Fresh basil"
+              }
+            },
+            "crust": {
+              "label": "pizza crust",
+              "options": {
+                "standard": "standard"
+              }
+            }
+          }
         }
       ],
       "id": 1
