@@ -66,7 +66,6 @@ const app = {
   },
 
   initBooking: function(){
-    const thisApp = this;
 
     const bookingContainer = document.querySelector(select.containerOf.booking);
 
