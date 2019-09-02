@@ -853,4 +853,145 @@ input.error, select.error {
       justify-content: space-between;
   margin: 48px auto;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+[class^="image"] {
+  border-radius: 5px;
+}
+
+.main-page {
+  margin: 42px auto;
+  padding: 72px 48px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
+
+.main-page .subpages-images {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  margin: 5px;
+}
+
+.main-page .subpages-images .image-top {
+  position: relative;
+  -ms-flex: 0 0 49%;
+      flex: 0 0 49%;
+  max-width: 100%;
+  max-height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.main-page .image-hour {
+  text-align: center;
+  margin: 10px 5px;
+  padding: 0 5px;
+  background-color: #ff6b6b;
+  height: 150px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.main-page .image-hour .red-box-title {
+  font-size: 35px;
+}
+
+.main-page .image-hour .tekst {
+  margin: 0;
+  color: #fff;
+  word-spacing: 5px;
+}
+
+.main-page .carusel {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 60px 5px;
+}
+
+.main-page .carusel .image-wrapper {
+  -ms-flex: 0 0 35%;
+      flex: 0 0 35%;
+}
+
+.main-page .carusel .image-wrapper .image-carusel {
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-width: 100%;
+  height: 200px;
+}
+
+.main-page .carusel .carusel-wrapper {
+  -ms-flex: 0 0 60%;
+      flex: 0 0 60%;
+  position: relative;
+}
+
+.main-page .carusel .carusel-wrapper .mySlides {
+  display: none;
+}
+
+.main-page .carusel .carusel-wrapper .dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.main-page .carusel .carusel-wrapper .active, .main-page .carusel .carusel-wrapper .dot:hover {
+  background-color: #717171;
+}
+
+.main-page .carusel .quote-title {
+  margin: 5px 0;
+}
+
+.main-page .bottom-section {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  padding-top: 70px;
+}
+
+.main-page .bottom-section .gallery-wrapper {
+  -ms-flex: 0 0 32%;
+      flex: 0 0 32%;
+}
+
+.main-page .bottom-section .gallery-wrapper .image-bottom {
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+.main-page .bottom-section .gallery-wrapper .addjust {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 197.98px;
+}
 /*# sourceMappingURL=style.css.map */

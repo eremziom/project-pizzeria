@@ -2,6 +2,7 @@ import {settings, select, classNames, templates} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Main from './components/Main.js';
 
 const app = {
   initPages: function(){
@@ -63,6 +64,12 @@ const app = {
         link.getAttribute('href') == '#' + pageId);
     }
 
+  },
+
+  initMain: function(){
+    const mainPageContainer = document.querySelector(select.containerOf.main);
+
+    new Main(mainPageContainer);
   },
 
   initBooking: function(){
@@ -128,6 +135,7 @@ const app = {
     console.log('templates:', templates);
 
     thisApp.initPages();
+    thisApp.initMain();
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
