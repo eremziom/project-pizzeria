@@ -70,6 +70,9 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  mainPage: {
+    pageChange: '.image-top',
+  }
 };
 
 export const classNames = {

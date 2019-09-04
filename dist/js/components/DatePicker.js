@@ -38,6 +38,9 @@ class DatePicker extends BaseWidget{
       ],
       onChange: function(dateStr){
         thisWidget.value = utils.dateToStr(new Date(utils.addDays(dateStr, 1)));
+        console.log(dateStr[0]);
+        //thisWidget.value = utils.dateToStr(new Date(dateStr[0]));
+        console.log(thisWidget.value);
       }
     });
   }
