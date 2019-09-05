@@ -90,8 +90,10 @@ class Main{
         event.preventDefault();
           if(this.classList.contains(settings.db.order)){
             thisMain.classShift(settings.db.order);
+            window.location.hash = '#/' + settings.db.order;
           } else {
             thisMain.classShift(settings.db.booking);
+            window.location.hash = '#/' + settings.db.booking;
           }
           thisMain.classShift(settings.db.main);
       });

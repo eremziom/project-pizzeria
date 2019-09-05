@@ -71,7 +71,7 @@ export const select = {
     links: '.main-nav a',
   },
   mainPage: {
-    pageChange: '.image-top',
+    pageChange: '.page-switch',
   }
 };
 
