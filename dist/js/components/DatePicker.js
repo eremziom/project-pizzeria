@@ -1,14 +1,13 @@
 import BaseWidget from './BaseWidget.js';
 import { settings, select } from '../settings.js';
 import { utils } from '../utils.js';
+import Booking from './Booking.js';
 
 class DatePicker extends BaseWidget{
   constructor(wrapper){
     super (wrapper, utils.dateToStr(new Date()));
 
     const thisWidget = this;
-
-    //console.log('zzz', wrapper);
 
     thisWidget.dom.wrapper = wrapper;
 
@@ -21,9 +20,7 @@ class DatePicker extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.minDate = new Date(thisWidget.value);
-    console.log('Plugin inicjowany z datą: ', thisWidget.value);
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
-    //console.log('min', thisWidget.minDate, ' max', thisWidget.maxDate);
 
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
@@ -39,9 +36,6 @@ class DatePicker extends BaseWidget{
       ],
       onChange: function(dateStr){
         thisWidget.value = utils.dateToStr(new Date(utils.addDays(dateStr, 1)));
-        console.log(dateStr[0]);
-        //thisWidget.value = utils.dateToStr(new Date(dateStr[0]));
-        console.log('co to jest?', thisWidget.value);
       }
     });
   }
