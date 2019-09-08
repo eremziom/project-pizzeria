@@ -698,7 +698,6 @@ input.error, select.error {
 
 .rangeSlider {
   top: 12px;
-  background: #e6e6e6;
   box-shadow: none;
   height: 12px;
 }
@@ -719,6 +718,7 @@ input.error, select.error {
   height: 24px;
   top: -6px;
   background: #333;
+  z-index: 10;
 }
 
 .rangeSlider__fill {
@@ -854,6 +854,57 @@ input.error, select.error {
   margin: 48px auto;
 }
 
+.rangeSlider-green {
+  background: green;
+  left: 0;
+  -ms-flex: 0 0 4%;
+      flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-yellow {
+  background: yellow;
+  left: 0;
+  -ms-flex: 0 0 4%;
+      flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-red {
+  background: red;
+  left: 0;
+  -ms-flex: 0 0 4%;
+      flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-red {
+  top: 12px;
+  background-color: red;
+  box-shadow: none;
+  height: 12px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
+.full-strip {
+  display: -ms-flexbox;
+  display: flex;
+  background: lightblue;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -955,6 +1006,7 @@ input.error, select.error {
   background: linear-gradient(to bottom, rgba(72, 76, 97, 0) 0%, rgba(72, 76, 97, 0.8) 75%);
   opacity: 0;
   pointer-events: none;
+  border-radius: 5px;
 }
 
 .image-hour {

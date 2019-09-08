@@ -21,6 +21,7 @@ class DatePicker extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.minDate = new Date(thisWidget.value);
+    console.log('Plugin inicjowany z datą: ', thisWidget.value);
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
     //console.log('min', thisWidget.minDate, ' max', thisWidget.maxDate);
 
@@ -40,7 +41,7 @@ class DatePicker extends BaseWidget{
         thisWidget.value = utils.dateToStr(new Date(utils.addDays(dateStr, 1)));
         console.log(dateStr[0]);
         //thisWidget.value = utils.dateToStr(new Date(dateStr[0]));
-        console.log(thisWidget.value);
+        console.log('co to jest?', thisWidget.value);
       }
     });
   }

@@ -88,6 +88,7 @@ class Booking{
 
       thisBooking.updateDOM();
       thisBooking.initActions();
+      thisBooking.paintSlider();
   }
 
   makeBooked(date, hour, duration, table){
@@ -238,6 +239,20 @@ class Booking{
           thisBooking.bookTable(table);
         }
       });
+    }
+  }
+
+  paintSlider(){
+    const thisBooking = this;
+    console.log("booked= ", thisBooking.booked);
+    for(let date in thisBooking.booked){
+      console.log('date to: ', date);
+      for(let hour in date){
+        console.log('hour to: ', hour.length);
+        for(let bookNumber in hour){
+          console.log('bookNumber to: ', bookNumber.length);
+        }
+      }
     }
   }
 }

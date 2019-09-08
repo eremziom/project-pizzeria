@@ -59,7 +59,7 @@
 
 .rangeSlider {
   top: $base-size;
-  background: lighten($color-dark, 70%);
+  //background: lighten($color-dark, 70%); // Pasek po prawej od kulki
   box-shadow: none;
   height: $base-size;
 
@@ -73,16 +73,17 @@
       display: none;
     }
 
-    &__horizontal {
+    &__horizontal { // Kulka
       width: ($base-size * 2);
       height: ($base-size * 2);
       top: -6px;
       background: $color-dark;
+      z-index: 10;
     }
 
   }
 
-  &__fill {
+  &__fill { //Pasek po lewej od kulki0
     background: $color-success;
     transition-timing-function: cubic-bezier(0, 1, 0, 1);
     transition: width 100ms;
@@ -214,4 +215,47 @@
 .booking-options {
   @include flex(row, flex-start, space-between);
   margin: ($base-size * 4) auto;
+}
+
+.rangeSlider-green {
+  background: green; // Pasek po prawej od kulki
+  left: 0;
+  flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-yellow {
+  background: yellow; // Pasek po prawej od kulki
+  left: 0;
+  flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-red {
+  background: red; // Pasek po prawej od kulki
+  left: 0;
+  flex: 0 0 4%;
+  list-style: none;
+}
+
+.rangeSlider-red {
+  top: $base-size;
+  background-color: red;
+  box-shadow: none;
+  height: $base-size;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.full-strip {
+  display: flex;
+  //position: absolute;
+  background: lightblue;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
